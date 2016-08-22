@@ -13,7 +13,6 @@ public class Exerc3_1 {
 				precoPassagem		= 0;
 		
 		int 	cidade,
-				sairConsulta 		= 0,
 				numeroEscalas		= 0,
 				pesquisa			= 0;
 		
@@ -92,7 +91,6 @@ public class Exerc3_1 {
 						}else{
 							encontrouCidade = false;
 						}
-						
 					}
 				}
 				
@@ -106,12 +104,11 @@ public class Exerc3_1 {
 					
 				}
 				
-//				leia.nextLine();
 			}while(nomePesquisa.equalsIgnoreCase("") || encontrouCidade == false);
 			
 		}while(nomePesquisa != "0");
 		
-		
+
 		leia.nextLine();
 		leia.close();
 		
