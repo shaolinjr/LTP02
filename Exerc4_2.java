@@ -23,32 +23,32 @@ public class Exerc4_2 {
 				nomes[funcionario] = leia.nextLine();
 				
 				if (nomes[funcionario].equals("")){
-					System.out.println("Nome inv·lido. Digite novamente.");
+					System.out.println("Nome inv√°lido. Digite novamente.");
 				}else if (nomes[funcionario].equalsIgnoreCase("FIM")) {
 					break;
+					
 				}
 			}while(nomes[funcionario].equals(""));
 			if (nomes[funcionario].equalsIgnoreCase("FIM")){
 				System.out.println("Saindo...");
-				nomes[funcionario] = null;
-				funcionario--;
+//				funcionario--;
 				break;
 			}
 			do {
-				System.out.print("Digite seu cÛdigo: ");
+				System.out.print("Digite seu c√≥digo: ");
 				codigoFuncionario[funcionario] = leia.nextInt();
 				
 				if (codigoFuncionario[funcionario] < 0 || codigoFuncionario[funcionario] > 999){
-					System.out.println("CÛdigo inv·lido. Digite novamente.");
+					System.out.println("C√≥digo inv√°lido. Digite novamente.");
 				}
 			}while(codigoFuncionario[funcionario] < 0 || codigoFuncionario[funcionario] > 999);
 			
 			do {
-				System.out.print("Digite o n˙mero de peÁas produzidas: ");
+				System.out.print("Digite o n√∫mero de pe√ßas produzidas: ");
 				numeroPecas = leia.nextInt();
 				
 				if (numeroPecas < 0){
-					System.out.println("N˙mero de peÁas inv·lido. Digite novamente.");
+					System.out.println("N√∫mero de pe√ßas inv√°lido. Digite novamente.");
 				}
 			}while(numeroPecas < 0);
 			
@@ -59,12 +59,16 @@ public class Exerc4_2 {
 		}
 		
 		// imprimir resultados finais
-		mediaSalarios = (float) somaSalarios/funcionario;
-		System.out.println("Nome\tSal·rio\tMÈdia Sal·rios\n--------\t---------\t-------");
-		for (int x = 0; x < nomes.length; x++){
-			System.out.print(nomes[x]+"\t");
-			System.out.print(salarios[x]+"\t");
-			System.out.print(mediaSalarios+"\t");
+		mediaSalarios = somaSalarios/funcionario;
+		System.out.println("\nNome\t\tSal√°rio\t\tM√©dia\n----------\t----------\t----------");
+		for (int x = 0; x <= funcionario - 1; x++){
+			
+			if (nomes[x] != null){
+				System.out.print(nomes[x]+"\t\t");
+				System.out.print(salarios[x]+"\t\t");
+				System.out.print(mediaSalarios+"\t");
+				System.out.println("\n");
+			}
 		}
 	}
 	
