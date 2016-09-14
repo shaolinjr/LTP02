@@ -1,6 +1,6 @@
 import java.util.*;
 public class Exerc4_3 {
-	static 	String vetCidades[] = {"Belo Horizonte", "São Paulo", "Rio de Janeiro", "Salvador", "Curitiba"};
+	public static 	String vetCidades[] = {"Belo Horizonte", "SÃ£o Paulo", "Rio de Janeiro", "Salvador", "Curitiba"};
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -12,13 +12,18 @@ public class Exerc4_3 {
 				
 		int 	diaEntrada,
 				diaSaida,
-				hospede;
+				hospede,
+				valorDiaria = 0,
+				somaValores = 0;
 		
+		float 	media;
+		
+//		boolean cidadeEncontrada = false;
 		float valorConta[] = new float[100];
 		
 		for (hospede = 0; hospede < nomes.length;hospede++){
 			
-			System.out.println("Digite seu nome (digite fim para sair): ");
+			System.out.print("Digite seu nome (digite fim para sair): ");
 			nomes[hospede] = leia.nextLine();
 			
 			if (nomes[hospede].equalsIgnoreCase("fim")){
@@ -30,40 +35,87 @@ public class Exerc4_3 {
 				System.out.print("Digite o dia do seu check-in: ");
 				diaEntrada = leia.nextInt();
 				if (diaEntrada < 0 || diaEntrada > 31){
-					System.out.println("Dia inválido! Digite novamente.");
+					System.out.println("Dia invï¿½lido! Digite novamente.");
 				}
 			}while(diaEntrada < 0 || diaEntrada > 31);
 			
 			do {
 				System.out.print("Digite o dia do seu check-out: ");
 				diaSaida = leia.nextInt();
-				if (diaSaida < 0 && diaSaida > 31){
-					System.out.println("Dia inválido! Digite novamente.");
+				if (diaSaida < 0 || diaSaida > 31 || diaSaida < diaEntrada){
+					System.out.println("Dia invï¿½lido! Digite novamente.");
 				}
-			}while(diaSaida < 0 && diaSaida > 31);
+			}while(diaSaida < 0 || diaSaida > 31 ||  diaSaida < diaEntrada);
 			
 			do {
-				System.out.println("Digite o tipo do seu quarto");
-				tipoQuarto = leia.next();
+				System.out.print("Digite o tipo do seu quarto: ");
+				tipoQuarto = leia.next().toLowerCase();
 				
-				if (tipoQuarto != "Standard" && tipoQuarto != "Luxo" && tipoQuarto != "Super-Luxo"){
-					System.out.println("Tipo inválido.Digite novamente");
+				if (!tipoQuarto.equalsIgnoreCase("Standard") && !tipoQuarto.equalsIgnoreCase("Luxo") && !tipoQuarto.equalsIgnoreCase("Super-Luxo")){
+					System.out.println("Tipo invï¿½lido.Digite novamente");
 				}
-			}while(tipoQuarto != "Standard" && tipoQuarto != "Luxo" && tipoQuarto != "Super-Luxo");
+			}while(!tipoQuarto.equalsIgnoreCase("Standard") && !tipoQuarto.equalsIgnoreCase("Luxo") && !tipoQuarto.equalsIgnoreCase("Super-Luxo"));
+			leia.nextLine();
+			
+			switch (tipoQuarto){
+			case "standard": 
+				valorDiaria = 120;
+				break;
+			case "luxo":
+				valorDiaria = 150;
+				break;
+			case "super-luxo":
+				valorDiaria = 180;
+				break;
+			default:
+				System.out.println("Erro!");
+			}
+			
+			valorConta[hospede] = calcularConta(diaEntrada, diaSaida, valorDiaria);
+			somaValores+= valorConta[hospede];
 			
 			do {
-				System.out.println("Digite a cidade da sua estadia: ");
+				System.out.print("Digite a cidade da sua estadia: ");
 				cidadeHotel = leia.nextLine();
+				cidadeEhValida(cidadeHotel);
+				
+				if (cidadeEhValida(cidadeHotel) == false){
+					System.out.println("Cidade nÃ£o encontrada. Tente novamente.");
+				}
+			}while(cidadeEhValida(cidadeHotel) == false);
+		}
+//		if (hospede == 0){
+//			media = (float) somaValores/1;
+//		}else {
+			media = (float) somaValores/hospede;
+//		}
+		
+		System.out.println("HÃ³spede\t\tValor");
+		System.out.println("---------\t---------");
+		for (int x = 0; x <= hospede;x++){
+			
+			if (valorConta[x] >= media){
+				System.out.print(nomes[x]+"\t\t");
+				System.out.print(valorConta[x]+"\n");
 			}
 		}
 		
 		
-		
 	}
 	
-	public static void calcularConta(int diaEntrada, int diaSaida, int valorDiaria){
+	public static float calcularConta(int diaEntrada, int diaSaida, int valorDiaria){
 		
 		float conta = (diaSaida - diaEntrada)*valorDiaria;
-		System.out.println();
+		return conta;
+	}
+	
+	public static boolean cidadeEhValida (String cidadeHotel){
+		boolean cidadeEncontrada = false;
+		for (int x = 0; x < vetCidades.length;x++){
+			if (cidadeHotel.equalsIgnoreCase(vetCidades[x])){
+				cidadeEncontrada = true;
+			}
+		}
+		return cidadeEncontrada;
 	}
 }
