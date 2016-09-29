@@ -7,8 +7,8 @@ public class Exerc5_2 {
 		// TODO Auto-generated method stub
 		Scanner leia = new Scanner(System.in);
 		boolean erro = false;
-		String codigo, digitoDois;
-		int digitoUm, somaDigitos = 0, multiplicaDigitos = 1;
+		String codigo, digitoDois,digitoVerificador;
+		int digitoUm;
 		
 		do {
 			System.out.print("Digite o código contendo 11 caracteres: ");
@@ -27,28 +27,37 @@ public class Exerc5_2 {
 			}
 		}while (codigo.length() != 11 || erro == true);
 		
-		// Fazer manipulação para gerar resultado
+		digitoVerificador = calcularDigitoVerificador(codigo);
 		
+		// Resultado
+		
+		if (codigo.charAt(9) ==  codigo.charAt(0) && codigo.charAt(10) == digitoVerificador.charAt(1)){
+			System.out.println("Código correto!");
+		}
+		else{
+			System.out.println("Código inválido!");
+		}
+		
+	}
+	// Fazer manipulação para gerar resultado
+	public static String calcularDigitoVerificador(String codigo){
+		int somaDigitos = 0, multiplicaDigitos = 1;
+		String digito= "";
+		int digitoUm, digitoDois;
 		for (byte x = 0;x < 9;x++){
 			
 			// Somando os 9 digitos
 			somaDigitos += Character.digit(codigo.charAt(x), 10);
 			// Multiplicando os 9 digitos
 			multiplicaDigitos *=  Character.digit(codigo.charAt(x), 10);
-		}
-		
-		// Calculando digitoUm
+		}	
 		digitoUm = (int) somaDigitos / 10;
+		digitoDois = multiplicaDigitos%10;
+		// 0BS: Concatenar int's, soma uma string vazia antes dos valores 
+		digito += digitoUm+digitoDois;
 		
-		// Calculando digitoDois
-		String numeroString = String.valueOf(multiplicaDigitos);
-		digitoDois = numeroString.substring(numeroString.length() - 1);
+		return digito;
 		
-		// Mostrando dígitos
-		System.out.println("1º Dígito verificador: "+ digitoUm);
-		System.out.println("2º Dígito verificador: "+digitoDois);
-		
-		leia.close();
 	}
 
 }
