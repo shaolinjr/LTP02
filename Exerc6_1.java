@@ -25,7 +25,7 @@ public class Exerc6_1 {
 		String novoNome = firstLetterUp(nome);
 		for (int i = 1; i < nome.length();i++){
 			if (nome.charAt(i) == ' '){
-				novoNome = novoNome.replaceFirst(String.valueOf(nome.charAt(i+1)), String.valueOf(nome.charAt(i+1)).toUpperCase());
+				novoNome = novoNome.replaceFirst(nome.substring(i+1, i+2), nome.substring(i+1, i+2).toUpperCase());
 			}
 		}
 		
