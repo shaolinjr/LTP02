@@ -31,7 +31,7 @@ public class Exerc5_2 {
 		
 		// Resultado
 		
-		if (codigo.charAt(9) ==  codigo.charAt(0) && codigo.charAt(10) == digitoVerificador.charAt(1)){
+		if (codigo.charAt(9) ==  digitoVerificador.charAt(0) && codigo.charAt(10) == digitoVerificador.charAt(1)){
 			System.out.println("Código correto!");
 		}
 		else{
@@ -54,7 +54,7 @@ public class Exerc5_2 {
 		digitoUm = (int) somaDigitos / 10;
 		digitoDois = multiplicaDigitos%10;
 		// 0BS: Concatenar int's, soma uma string vazia antes dos valores 
-		digito += digitoUm+digitoDois;
+		digito = digito+ digitoUm+digitoDois;
 		
 		return digito;
 		
